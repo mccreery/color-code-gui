@@ -1,0 +1,14 @@
+[
+{
+  "modid": "colorcodegui",
+  "name": "Color Code GUI",
+  "description": "Adds buttons for color codes for use on Bukkit servers, and a Unicode table.",
+  "version": "1.1",
+  "mcversion": "1.8.0",
+  "authorList": ["NukeDuck"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": ["logo.png"],
+  "dependencies": []
+}
+]
