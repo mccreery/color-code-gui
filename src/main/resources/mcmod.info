@@ -3,7 +3,7 @@
 	"name": "Color Code GUI",
 	"description": "Adds formatting buttons for use on Bukkit servers, and a Unicode table.",
 	"version": "1.2",
-	"mcversion": "1.9.4",
+	"mcversion": "1.12.2",
 	"authorList": ["NukeDuck"],
 	"credits": "",
 	"logoFile": "",

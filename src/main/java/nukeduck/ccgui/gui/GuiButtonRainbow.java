@@ -12,8 +12,8 @@ public class GuiButtonRainbow extends GuiButtonTooltip {
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		super.drawButton(mc, mouseX, mouseY);
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		super.drawButton(mc, mouseX, mouseY, partialTicks);
 		GraphicsUtils.drawButtonImage(Constants.ICONS, this, 0xFFFFFF,
 			32, 0, 16, 16);
 	}

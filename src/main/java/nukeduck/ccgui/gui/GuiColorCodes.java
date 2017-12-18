@@ -138,12 +138,12 @@ public class GuiColorCodes extends GuiScreen {
 				ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
 				int scale = Utils.getScaleFactor();
 
-				final int x = (this.unicodeToggle.xPosition + this.unicodeToggle.width / 2) * scale / sr.getScaleFactor() - this.unicodeTable.getWidth() / 2;
+				final int x = (this.unicodeToggle.x + this.unicodeToggle.width / 2) * scale / sr.getScaleFactor() - this.unicodeTable.getWidth() / 2;
 				int y;
 				if(this.parent instanceof GuiChat && !ColorCodeGUI.INSTANCE.config.top) {
-					y = this.unicodeToggle.yPosition * scale / sr.getScaleFactor() - this.unicodeTable.getHeight() - Constants.SPACING;
+					y = this.unicodeToggle.y * scale / sr.getScaleFactor() - this.unicodeTable.getHeight() - Constants.SPACING;
 				} else {
-					y = (this.unicodeToggle.yPosition + this.unicodeToggle.height) * scale / sr.getScaleFactor() + Constants.SPACING;
+					y = (this.unicodeToggle.y + this.unicodeToggle.height) * scale / sr.getScaleFactor() + Constants.SPACING;
 				}
 				this.unicodeTable.setPos(x, y);
 			}

@@ -129,7 +129,7 @@ public class GuiUnicodeTable extends Gui {
 			right, this.y + SPACING + ColorCodeGUI.FONT_HEIGHT,
 			0x99666666, 0x99000000);*/
 
-		this.drawString(mc.fontRendererObj, I18n.format("ccgui.unicodeTitle"),
+		this.drawString(mc.fontRenderer, I18n.format("ccgui.unicodeTitle"),
 			this.x + Constants.SPACING, this.y + Constants.SPACING, 0xffffff);
 
 		this.drawContents(mc);
@@ -141,7 +141,7 @@ public class GuiUnicodeTable extends Gui {
 					Character.getName(this.table.charAt(hovered)), ' ')
 			});
 			GuiUtils.drawHoveringText(name, mouseX, mouseY,
-				mc.displayWidth, mc.displayHeight, -1, mc.fontRendererObj);
+				mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
 		}
 	}
 
@@ -160,7 +160,7 @@ public class GuiUnicodeTable extends Gui {
 
 				mc.getTextureManager().bindTexture(Constants.ICONS);
 				this.drawTexturedModalRect(xPos, yPos, 48, 0, 10, 10);
-				this.drawCenteredString(mc.fontRendererObj, current, xPos + 5, yPos, 0xFFFFFFFF);
+				this.drawCenteredString(mc.fontRenderer, current, xPos + 5, yPos, 0xFFFFFFFF);
 
 				xPos += 10;
 			}

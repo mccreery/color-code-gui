@@ -22,15 +22,15 @@ public class GuiButtonFormat extends GuiButtonTooltip {
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		super.drawButton(mc, mouseX, mouseY);
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		super.drawButton(mc, mouseX, mouseY, partialTicks);
 
 		if(this.format.isColor()) {
 			GraphicsUtils.drawButtonImage(
 				Constants.ICONS, this, 0xFFFFFF, 0, 0, 16, 16);
 
 			GraphicsUtils.drawButtonImage(Constants.ICONS, this,
-				mc.fontRendererObj.getColorCode(this.format.getChar()),
+				mc.fontRenderer.getColorCode(this.format.getChar()),
 				16, 0, 16, 16);
 		}
 	}

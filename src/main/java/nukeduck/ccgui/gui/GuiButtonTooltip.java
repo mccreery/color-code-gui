@@ -37,7 +37,7 @@ public class GuiButtonTooltip extends GuiButton {
 			GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
 
 			GuiUtils.drawHoveringText(this.tooltip, mouseX, mouseY,
-				mc.displayWidth, mc.displayHeight, -1, mc.fontRendererObj);
+				mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
 
 			GL11.glPopAttrib();
 			return true;

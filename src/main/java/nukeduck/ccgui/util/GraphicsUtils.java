@@ -32,8 +32,8 @@ public final class GraphicsUtils {
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
 		GlStateManager.blendFunc(770, 771);
 
-		int x = button.xPosition + (button.width - width) / 2;
-		int y = button.yPosition + (button.height - height) / 2;
+		int x = button.x + (button.width - width) / 2;
+		int y = button.y + (button.height - height) / 2;
 		button.drawTexturedModalRect(x, y, u, v, width, height);
 	}
 }
