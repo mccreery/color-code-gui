@@ -2,19 +2,19 @@ package nukeduck.ccgui.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
-import nukeduck.ccgui.util.Constants;
+import nukeduck.ccgui.ColorCodeGUI;
 import nukeduck.ccgui.util.GraphicsUtils;
 
 public class GuiButtonRainbow extends GuiButtonTooltip {
 	public GuiButtonRainbow(int buttonId, int x, int y) {
 		super(buttonId, x, y, 20, 20, "");
-		this.tooltip.add(I18n.format(Constants.LANG_RAINBOW));
+		this.tooltip.add(I18n.format("ccgui.rainbow"));
 	}
 
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		super.drawButton(mc, mouseX, mouseY, partialTicks);
-		GraphicsUtils.drawButtonImage(Constants.ICONS, this, 0xFFFFFF,
+		GraphicsUtils.drawButtonImage(ColorCodeGUI.ICONS, this, 0xFFFFFF,
 			32, 0, 16, 16);
 	}
 

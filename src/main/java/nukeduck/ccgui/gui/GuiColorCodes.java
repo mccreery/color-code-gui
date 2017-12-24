@@ -1,5 +1,7 @@
 package nukeduck.ccgui.gui;
 
+import static nukeduck.ccgui.ColorCodeGUI.MC;
+
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -11,11 +13,9 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import nukeduck.ccgui.ColorCodeGUI;
-import nukeduck.ccgui.util.Constants;
+import nukeduck.ccgui.Config;
 import nukeduck.ccgui.util.ITextEditor;
 import nukeduck.ccgui.util.RainbowLoop;
-import nukeduck.ccgui.util.Utils;
 
 public class GuiColorCodes extends GuiScreen {
 	private static final int FORMAT_COUNT = ChatFormatting.values().length;
@@ -39,15 +39,14 @@ public class GuiColorCodes extends GuiScreen {
 	@Override
 	public void initGui() {
 		ScaledResolution sr = new ScaledResolution(this.mc);
-		final float ratio = (float)sr.getScaleFactor() / Utils.getScaleFactor();
+		final float ratio = (float)sr.getScaleFactor() / Config.scale();
 		final int minX = (int)(2 * ratio);
-		final boolean top = ColorCodeGUI.INSTANCE.config.top
-			|| !(this.parent instanceof GuiChat);
+		final boolean top = Config.top || !(this.parent instanceof GuiChat);
 
 		int y = top ? 5 : (int)((sr.getScaledHeight() - 16) * ratio) - 20;
 		for(int i = 0, x = minX; i < FORMAT_COUNT + 2; i++, x += 22) {
 			if(i < FORMAT_COUNT) {
-				if(ColorCodeGUI.INSTANCE.config.twoLines && i == 16) {
+				if(Config.twoLines && i == 16) {
 					x = minX;
 					y += top ? 22 : -22;
 				}
@@ -81,7 +80,7 @@ public class GuiColorCodes extends GuiScreen {
 
 			StringBuilder builder = new StringBuilder(added.length() * 3);
 			for(int i = 0; i < added.length(); i++) {
-				builder.append(Utils.getFormatString(this.rainbow.next())).append(added.charAt(i));
+				builder.append(Config.getCode(this.rainbow.next())).append(added.charAt(i));
 			}
 			this.editor.insertAtCursor(builder.toString());
 		}
@@ -93,17 +92,18 @@ public class GuiColorCodes extends GuiScreen {
 		if(this.unicodeToggle.toggled && this.unicodeTable.mouseClicked(mouseX, mouseY, mouseButton)) {
 			return;
 		}
-		ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
-		int scale = Utils.getScaleFactor();
+		ScaledResolution sr = new ScaledResolution(MC);
+		int scale = Config.scale();
 		int mouseXS = mouseX * sr.getScaleFactor() / scale;
 		int mouseYS = mouseY * sr.getScaleFactor() / scale;
 
 		super.mouseClicked(mouseXS, mouseYS, mouseButton);
 	}
+
 	@Override
 	protected void mouseReleased(int mouseX, int mouseY, int state) {
-		ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
-		int scale = Utils.getScaleFactor();
+		ScaledResolution sr = new ScaledResolution(MC);
+		int scale = Config.scale();
 		int mouseXS = mouseX * sr.getScaleFactor() / scale;
 		int mouseYS = mouseY * sr.getScaleFactor() / scale;
 
@@ -112,10 +112,11 @@ public class GuiColorCodes extends GuiScreen {
 			this.unicodeTable.mouseReleased(mouseX, mouseY, state);
 		}
 	}
+
 	@Override
 	protected void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastClick) {
-		ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
-		int scale = Utils.getScaleFactor();
+		ScaledResolution sr = new ScaledResolution(MC);
+		int scale = Config.scale();
 		int mouseXS = mouseX * sr.getScaleFactor() / scale;
 		int mouseYS = mouseY * sr.getScaleFactor() / scale;
 
@@ -128,22 +129,22 @@ public class GuiColorCodes extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) throws IOException {
 		if(button.id < FORMAT_COUNT) {
-			this.editor.insertAtCursor(Utils.getFormatString(((GuiButtonFormat)button).format));
+			this.editor.insertAtCursor(Config.getCode(((GuiButtonFormat)button).format));
 		} else if(button == this.rainbowToggle) {
 			if(this.rainbowToggle.toggle()) {
 				this.rainbow = RainbowLoop.INSTANCE.iterator();
 			}
 		} else if(button == this.unicodeToggle) {
 			if(this.unicodeToggle.toggle()) {
-				ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
-				int scale = Utils.getScaleFactor();
+				ScaledResolution sr = new ScaledResolution(MC);
+				int scale = Config.scale();
 
-				final int x = (this.unicodeToggle.x + this.unicodeToggle.width / 2) * scale / sr.getScaleFactor() - this.unicodeTable.getWidth() / 2;
+				final int x = (this.unicodeToggle.x + this.unicodeToggle.width / 2) * scale / sr.getScaleFactor() - this.unicodeTable.width() / 2;
 				int y;
-				if(this.parent instanceof GuiChat && !ColorCodeGUI.INSTANCE.config.top) {
-					y = this.unicodeToggle.y * scale / sr.getScaleFactor() - this.unicodeTable.getHeight() - Constants.SPACING;
+				if(this.parent instanceof GuiChat && !Config.top) {
+					y = this.unicodeToggle.y * scale / sr.getScaleFactor() - this.unicodeTable.height() - 5;
 				} else {
-					y = (this.unicodeToggle.y + this.unicodeToggle.height) * scale / sr.getScaleFactor() + Constants.SPACING;
+					y = (this.unicodeToggle.y + this.unicodeToggle.height) * scale / sr.getScaleFactor() + 5;
 				}
 				this.unicodeTable.setPos(x, y);
 			}
@@ -152,8 +153,8 @@ public class GuiColorCodes extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		ScaledResolution sr = new ScaledResolution(Constants.MINECRAFT);
-		int scale = Utils.getScaleFactor();
+		ScaledResolution sr = new ScaledResolution(MC);
+		int scale = Config.scale();
 		int mouseXS = mouseX * sr.getScaleFactor() / scale;
 		int mouseYS = mouseY * sr.getScaleFactor() / scale;
 

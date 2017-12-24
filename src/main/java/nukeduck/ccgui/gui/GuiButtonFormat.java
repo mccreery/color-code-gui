@@ -3,9 +3,9 @@ package nukeduck.ccgui.gui;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
-import nukeduck.ccgui.util.Constants;
+import nukeduck.ccgui.ColorCodeGUI;
 import nukeduck.ccgui.util.GraphicsUtils;
-import nukeduck.ccgui.util.Utils;
+import nukeduck.ccgui.util.Util;
 
 public class GuiButtonFormat extends GuiButtonTooltip {
 	public final ChatFormatting format;
@@ -18,7 +18,7 @@ public class GuiButtonFormat extends GuiButtonTooltip {
 		if(display != null) {
 			this.displayString = this.format.toString() + display;
 		}
-		this.tooltip.add(Utils.getDisplayName(this.format.getName(), '_'));
+		this.tooltip.add(Util.toTitle(this.format.getName()));
 	}
 
 	@Override
@@ -27,16 +27,16 @@ public class GuiButtonFormat extends GuiButtonTooltip {
 
 		if(this.format.isColor()) {
 			GraphicsUtils.drawButtonImage(
-				Constants.ICONS, this, 0xFFFFFF, 0, 0, 16, 16);
+				ColorCodeGUI.ICONS, this, 0xFFFFFF, 0, 0, 16, 16);
 
-			GraphicsUtils.drawButtonImage(Constants.ICONS, this,
+			GraphicsUtils.drawButtonImage(ColorCodeGUI.ICONS, this,
 				mc.fontRenderer.getColorCode(this.format.getChar()),
 				16, 0, 16, 16);
 		}
 	}
 
 	/** @return The appropriate character corresponding to a format */
-	private static final Character getDisplayLetter(ChatFormatting format) {
+	private static char getDisplayLetter(ChatFormatting format) {
 		switch(format) {
 			case OBFUSCATED:    return 'O';
 			case BOLD:          return 'B';
@@ -44,7 +44,7 @@ public class GuiButtonFormat extends GuiButtonTooltip {
 			case UNDERLINE:     return 'U';
 			case ITALIC:        return 'I';
 			case RESET:         return 'R';
-			default:            return null;
+			default:            return '?';
 		}
 	}
 }

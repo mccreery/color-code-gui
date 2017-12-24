@@ -76,7 +76,7 @@ public abstract class ITextEditor implements CharSequence {
 					return new TextEditorSign((GuiEditSign)screen, sign, line);
 				}
 			} else if(screen != null) {
-				List<GuiTextField> textFields = Utils.getFields(screen, GuiTextField.class, true);
+				List<GuiTextField> textFields = Util.getFields(screen, GuiTextField.class, true);
 
 				if(textFields.size() > 0) {
 					return new TextEditorGui(textFields.toArray(new GuiTextField[textFields.size()]));

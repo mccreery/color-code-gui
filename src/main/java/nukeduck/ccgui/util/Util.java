@@ -4,13 +4,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
+import org.apache.commons.lang3.text.WordUtils;
 
-import net.minecraft.client.gui.ScaledResolution;
-import nukeduck.ccgui.ColorCodeGUI;
-
-public final class Utils {
-	private Utils() {}
+public final class Util {
+	private Util() {}
 
 	/** As {@link #getFields(List, Object, Class, boolean)},
 	 * but creates and returns the list.
@@ -50,41 +47,9 @@ public final class Utils {
 		}
 	}
 
-	/** @return The text version of the formatting code */
-	public static final String getFormatString(ChatFormatting format) {
-		final char[] chars = new char[] {
-			ColorCodeGUI.INSTANCE.config.prefix, format.getChar()
-		};
-		return new String(chars);
-	}
-
-	/** @return The custom mod-wide GUI scale factor */
-	public static final int getScaleFactor() {
-		if(ColorCodeGUI.INSTANCE.config.scale == 0) {
-			return new ScaledResolution(Constants.MINECRAFT).getScaleFactor();
-		}
-		return ColorCodeGUI.INSTANCE.config.scale;
-	}
-
-	/** Generates a nice-looking display name from the codename
-	 * @param format The format to generate a name from
-	 * @param space The separator between words
-	 * @return The generated string */
-	public static final String getDisplayName(String name, char space) {
-		if(name == null) return null;
-
-		char[] chars = name.toCharArray();
-		chars[0] = Character.toUpperCase(chars[0]);
-
-		for(int i = 1; i < chars.length; i++) {
-			if(chars[i] == space) {
-				chars[i++] = ' '; // Replace with real space
-				if(i < chars.length) // Capitalise first letter of word
-					chars[i] = Character.toUpperCase(chars[i]);
-			} else { // Convert tail of word to lowercase
-				chars[i] = Character.toLowerCase(chars[i]);
-			}
-		}
-		return new String(chars);
+	/** @param name lower case, snake_case or CONSTANT_CASE identifier
+	 * @return {@code name} converted to Title Case */
+	public static final String toTitle(String name) {
+		return WordUtils.capitalizeFully(name.replace('_', ' '));
 	}
 }

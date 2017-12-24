@@ -1,7 +1,6 @@
 package nukeduck.ccgui.gui;
 
 import net.minecraft.client.gui.Gui;
-import nukeduck.ccgui.util.Constants;
 
 public class GuiScrollbar extends Gui {
 	protected static final int COLOR = 0x55000000;
@@ -63,7 +62,7 @@ public class GuiScrollbar extends Gui {
 	public void drawScrollbar() {
 		final int y = this.getBarY();
 		drawRect(this.x, this.y, this.x + this.width, this.y + this.height, 0x33000000);
-		drawRect(this.x + 1, y + 1, this.x + this.width - 1, y + this.getBarHeight() - 1, Constants.SCROLLBAR);
+		drawRect(this.x + 1, y + 1, this.x + this.width - 1, y + this.getBarHeight() - 1, 0x55000000);
 	}
 
 	public void setPane(int visible, int total) {
